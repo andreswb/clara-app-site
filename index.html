@@ -25,11 +25,17 @@
     }
     function showSection(section) {
       document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
-      document.getElementById(section).classList.remove('hidden');
+      const target = document.getElementById(section);
+      if(target) target.classList.remove('hidden');
     }
     window.onload = function() {
-      switchLanguage('en'); // default English
-      showSection('home');
+      const hash = window.location.hash.substring(1); // remove #
+      if(hash === 'privacy' || hash === 'home') {
+        showSection(hash);
+      } else {
+        showSection('home'); // default
+      }
+      switchLanguage('en'); // default language
     }
   </script>
 </head>
@@ -37,8 +43,8 @@
   <header>
     <h1>Clara</h1>
     <nav>
-      <a href="javascript:showSection('home')">Home</a>
-      <a href="javascript:showSection('privacy')">Privacy Policy</a>
+      <a href="#home" onclick="showSection('home')">Home</a>
+      <a href="#privacy" onclick="showSection('privacy')">Privacy Policy</a>
     </nav>
     <div>
       <select onchange="switchLanguage(this.value)">
@@ -74,7 +80,7 @@
         <h3>Datenschutz</h3>
         <p>Ihre Gesundheitsdaten gehören Ihnen. Clara speichert alle Informationen lokal auf Ihrem Gerät – nichts wird auf Server hochgeladen oder mit Dritten geteilt.</p>
         <p><strong>Hinweis:</strong> Clara ist ein Erfassungstool, keine medizinische Beratung.</p>
-        <a href="https://apps.apple.com/app/idYOUR_APP_ID" class="button">Im App Store herunterladen</a>
+        <a href="https://apps.apple.com/app/id6753362454" class="button">Im App Store herunterladen</a>
       </div>
 
       <!-- English -->
@@ -97,7 +103,7 @@
         <h3>Privacy</h3>
         <p>Your health data belongs to you. Clara stores all information locally on your device — nothing is uploaded to servers or shared with third parties.</p>
         <p><strong>Note:</strong> Clara is a tracking tool, not medical advice.</p>
-        <a href="https://apps.apple.com/app/idYOUR_APP_ID" class="button">Download on the App Store</a>
+        <a href="https://apps.apple.com/app/id6753362454" class="button">Download on the App Store</a>
       </div>
 
       <!-- Spanish -->
@@ -164,7 +170,7 @@
   </div>
 
   <footer>
-    © 2025 Clara. All rights reserved. | Contact: <a href="mailto:your@email.com">your@email.com</a>
+    © 2025 Clara Tracker. All rights reserved. | Contact: <a href="mailto:Bandurria.Apps@gmail.com">Bandurria.Apps@gmail.com</a>
   </footer>
 </body>
 </html>
