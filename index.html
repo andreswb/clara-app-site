@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,26 +20,33 @@
     footer { text-align: center; padding: 20px; font-size: 0.9em; color: #555; border-top: 1px solid #ccc; margin-top: 40px; }
     select { padding: 5px; border-radius: 5px; }
   </style>
-  <script>
-    function switchLanguage(lang) {
-      document.querySelectorAll('.lang').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.lang-' + lang).forEach(el => el.classList.remove('hidden'));
-    }
-    function showSection(section) {
-      document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
-      const target = document.getElementById(section);
-      if(target) target.classList.remove('hidden');
-    }
-    window.onload = function() {
-      const hash = window.location.hash.substring(1); // remove #
-      if(hash === 'privacy' || hash === 'home') {
-        showSection(hash);
-      } else {
-        showSection('home'); // default
-      }
-      switchLanguage('en'); // default language
-    }
-  </script>
+  
+<script>
+  function switchLanguage(lang) {
+    document.querySelectorAll('.lang').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.lang-' + lang).forEach(el => el.classList.remove('hidden'));
+  }
+
+  function showSection(section) {
+    document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
+    const target = document.getElementById(section);
+    if (target) target.classList.remove('hidden');
+  }
+
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  window.onload = function() {
+    const hash = window.location.hash.substring(1); // e.g. #privacy
+    const lang = getQueryParam('lang'); // e.g. ?lang=de
+
+    showSection(hash === 'privacy' ? 'privacy' : 'home'); // default to home
+    switchLanguage(lang === 'de' || lang === 'es' ? lang : 'en'); // default to English
+  }
+</script>
+
 </head>
 <body>
   <header>
