@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clara - Period Tracker / Perioden-Tracker / Rastreador Menstrual</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; color: #333; }
+    header { background: #007aff; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { margin: 0; font-size: 20px; }
+    nav a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    h2 { color: #222; }
+    ul { margin-left: 20px; }
+    a.button { display: inline-block; padding: 10px 20px; margin: 20px 0; background: #007aff; color: white; text-decoration: none; border-radius: 5px; }
+    .hidden { display: none; }
+    footer { text-align: center; padding: 20px; font-size: 0.9em; color: #555; border-top: 1px solid #ccc; margin-top: 40px; }
+    select { padding: 5px; border-radius: 5px; }
+  </style>
+  <script>
+    function switchLanguage(lang) {
+      document.querySelectorAll('.lang').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.lang-' + lang).forEach(el => el.classList.remove('hidden'));
+    }
+    function showSection(section) {
+      document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
+      document.getElementById(section).classList.remove('hidden');
+    }
+    window.onload = function() {
+      switchLanguage('en'); // default English
+      showSection('home');
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Clara</h1>
+    <nav>
+      <a href="javascript:showSection('home')">Home</a>
+      <a href="javascript:showSection('privacy')">Privacy Policy</a>
+    </nav>
+    <div>
+      <select onchange="switchLanguage(this.value)">
+        <option value="de">Deutsch</option>
+        <option value="en" selected>English</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- HOME SECTION -->
+    <div id="home" class="section">
+
+      <!-- German -->
+      <div class="lang lang-de hidden">
+        <h2>Clara - Perioden-Tracker</h2>
+        <p>Verstehen Sie Ihren Zyklus mit Respekt und Privatsphäre. Clara ist ein durchdachter Begleiter, der Ihnen hilft, die natürlichen Rhythmen Ihres Körpers zu verstehen.</p>
+        <h3>Hauptfunktionen</h3>
+        <ul>
+          <li>Einfache, intuitive Perioden-Erfassung</li>
+          <li>Musteranalyse mit medizinischem Kontext</li>
+          <li>Zyklusvorhersagen basierend auf Ihren Daten</li>
+          <li>Professionelle PDF-Berichte für Arztbesuche</li>
+          <li>Vollständige Datenprivatsphäre – alles bleibt auf Ihrem Gerät</li>
+          <li>Verfügbar in Deutsch, Englisch und Spanisch</li>
+        </ul>
+        <h3>Mustererkennung</h3>
+        <p>Clara analysiert Ihre Daten, um Muster zu erkennen, die Sie mit Ihrer Ärztin oder Ihrem Arzt besprechen können. Diese Beobachtungen sind keine Diagnosen.</p>
+        <h3>Premium-Version</h3>
+        <p>Schalten Sie unbegrenzte historische Daten mit einem einmaligen Kauf frei.</p>
+        <h3>Datenschutz</h3>
+        <p>Ihre Gesundheitsdaten gehören Ihnen. Clara speichert alle Informationen lokal auf Ihrem Gerät – nichts wird auf Server hochgeladen oder mit Dritten geteilt.</p>
+        <p><strong>Hinweis:</strong> Clara ist ein Erfassungstool, keine medizinische Beratung.</p>
+        <a href="https://apps.apple.com/app/idYOUR_APP_ID" class="button">Im App Store herunterladen</a>
+      </div>
+
+      <!-- English -->
+      <div class="lang lang-en">
+        <h2>Clara - Period Tracker</h2>
+        <p>Understand your cycle with respect and privacy. Clara is a thoughtful companion designed to help you understand your body’s natural rhythms.</p>
+        <h3>Core Features</h3>
+        <ul>
+          <li>Simple, intuitive period tracking</li>
+          <li>Pattern analysis with medical context</li>
+          <li>Cycle predictions based on your data</li>
+          <li>Professional PDF reports for healthcare visits</li>
+          <li>Full data privacy – everything stays on your device</li>
+          <li>Available in English, German, and Spanish</li>
+        </ul>
+        <h3>Pattern Insights</h3>
+        <p>Clara analyzes your tracked data to identify patterns you may want to discuss with your healthcare provider. These observations are not diagnoses.</p>
+        <h3>Premium Version</h3>
+        <p>Unlock unlimited historical data with a one-time purchase.</p>
+        <h3>Privacy</h3>
+        <p>Your health data belongs to you. Clara stores all information locally on your device — nothing is uploaded to servers or shared with third parties.</p>
+        <p><strong>Note:</strong> Clara is a tracking tool, not medical advice.</p>
+        <a href="https://apps.apple.com/app/idYOUR_APP_ID" class="button">Download on the App Store</a>
+      </div>
+
+      <!-- Spanish -->
+      <div class="lang lang-es hidden">
+        <h2>Clara - Rastreador Menstrual</h2>
+        <p>Comprende tu ciclo con respeto y privacidad. Clara es un compañero diseñado para ayudarte a comprender los ritmos naturales de tu cuerpo.</p>
+        <h3>Funciones principales</h3>
+        <ul>
+          <li>Seguimiento menstrual simple e intuitivo</li>
+          <li>Análisis de patrones con contexto médico</li>
+          <li>Predicciones de ciclo basadas en tus datos</li>
+          <li>Reportes PDF profesionales para consultas médicas</li>
+          <li>Privacidad total – todo permanece en tu dispositivo</li>
+          <li>Disponible en Español, Inglés y Alemán</li>
+        </ul>
+        <h3>Análisis de patrones</h3>
+        <p>Clara analiza tus datos para identificar patrones que puedes discutir con tu médico. Estas observaciones no son diagnósticos.</p>
+        <h3>Versión Premium</h3>
+        <p>Desbloquea datos históricos ilimitados con una compra única.</p>
+        <h3>Privacidad</h3>
+        <p>Tus datos de salud te pertenecen. Clara almacena toda la información localmente en tu dispositivo – nada se sube a servidores ni se comparte con terceros.</p>
+        <p><strong>Nota:</strong> Clara es una herramienta de seguimiento, no consejo médico.</p>
+        <a href="https://apps.apple.com/app/idYOUR_APP_ID" class="button">Descargar en el App Store</a>
+      </div>
+    </div>
+
+    <!-- PRIVACY SECTION -->
+    <div id="privacy" class="section hidden">
+
+      <!-- German -->
+      <div class="lang lang-de hidden">
+        <h2>Datenschutz</h2>
+        <h3>Keine Datenerfassung</h3>
+        <p>Clara sammelt oder teilt keine persönlichen Daten. Alles bleibt auf Ihrem Gerät.</p>
+        <h3>In-App-Käufe</h3>
+        <p>Zahlungen werden sicher über den App Store abgewickelt. Der Entwickler hat keinen Zugriff auf Zahlungsdaten.</p>
+        <h3>Ihre Kontrolle</h3>
+        <p>Beim Löschen der App werden auch alle Daten entfernt. Keine Kopien bleiben beim Entwickler.</p>
+      </div>
+
+      <!-- English -->
+      <div class="lang lang-en">
+        <h2>Privacy Policy</h2>
+        <h3>No Data Collection</h3>
+        <p>Clara does not collect, transmit, or share personal data. Everything stays on your device.</p>
+        <h3>In-App Purchases</h3>
+        <p>Purchases are securely processed by Apple. The developer has no access to payment details.</p>
+        <h3>Your Control</h3>
+        <p>If you delete the app, all your data is deleted with it. No copies remain with the developer.</p>
+      </div>
+
+      <!-- Spanish -->
+      <div class="lang lang-es hidden">
+        <h2>Política de Privacidad</h2>
+        <h3>No se recopilan datos</h3>
+        <p>Clara no recopila ni comparte información personal. Todo permanece en tu dispositivo.</p>
+        <h3>Compras dentro de la app</h3>
+        <p>Las compras se procesan de forma segura a través de Apple. El desarrollador no accede a tus datos de pago.</p>
+        <h3>Tu control</h3>
+        <p>Si eliminas la app, todos tus datos se eliminan. No se conservan copias en el desarrollador.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2025 Clara. All rights reserved. | Contact: <a href="mailto:your@email.com">your@email.com</a>
+  </footer>
+</body>
+</html>
