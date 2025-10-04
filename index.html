@@ -6,27 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; color: #333; }
-    header { background: #007aff; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
-    header h1 { margin: 0; font-size: 20px; }
-    nav a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; color: #333; }
+    header { background: linear-gradient(135deg, #FF6B9D 0%, #C06C84 100%); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    header h1 { margin: 0; font-size: 20px; display: flex; align-items: center; }
+    header h1 img { width: 32px; height: 32px; margin-right: 10px; }
+    nav a { color: white; margin: 0 10px; text-decoration: none; font-weight: 600; transition: opacity 0.3; }
+    nav a:hover { opacity: 0.8; text-decoration: underline; }
     .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
-    h2 { color: #222; }
-    h3 { color: #444; margin-top: 25px; }
-    ul { margin-left: 20px; }
-    a.button { display: inline-block; padding: 10px 20px; margin: 20px 0; background: #007aff; color: white; text-decoration: none; border-radius: 5px; }
+    h2 { color: #222; font-size: 2em; margin-bottom: 20px; }
+    h3 { color: #444; margin-top: 30px; font-size: 1.4em; }
+    ul { margin-left: 20px; line-height: 2; }
+    ul li { margin-bottom: 8px; }
+    a.button { display: inline-block; padding: 12px 30px; margin: 20px 0; background: linear-gradient(135deg, #FF6B9D 0%, #C06C84 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4); transition: transform 0.3s, box-shadow 0.3s; }
+    a.button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 107, 157, 0.6); }
     .hidden { display: none; }
     footer { text-align: center; padding: 20px; font-size: 0.9em; color: #555; border-top: 1px solid #ccc; margin-top: 40px; }
-    select { padding: 5px; border-radius: 5px; }
-    .faq-item { margin-bottom: 20px; }
-    .faq-item strong { color: #007aff; }
+    select { padding: 8px 12px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.2); color: white; font-weight: 600; cursor: pointer; }
+    select option { color: #333; }
+    .faq-item { margin-bottom: 25px; background: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #FF6B9D; }
+    .faq-item strong { color: #FF6B9D; font-size: 1.1em; display: block; margin-bottom: 10px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }
+    .feature-card { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 2px solid #e9ecef; }
+    .feature-card h4 { color: #FF6B9D; margin-top: 0; }
+    .note { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 5px; }
+    .note strong { color: #856404; }
   </style>
   
 <script>
   function switchLanguage(lang) {
     document.querySelectorAll('.lang').forEach(el => el.classList.add('hidden'));
     document.querySelectorAll('.lang-' + lang).forEach(el => el.classList.remove('hidden'));
+    document.getElementById('lang-selector').value = lang;
   }
 
   function showSection(section) {
@@ -55,19 +65,19 @@
 </head>
 <body>
   <header>
-    <h1 style="display:flex; align-items:center;">
-	<img src="favicon.ico" alt="Clara Logo" style="height:32px; width:32px; margin-right:10px;">
-	Clara Tracker
-	</h1>
+    <h1>
+      <img src="favicon.ico" alt="Clara Logo">
+      Clara Tracker
+    </h1>
     <nav>
       <a href="#home" onclick="showSection('home')">Home</a>
       <a href="#support" onclick="showSection('support')">Support</a>
       <a href="#privacy" onclick="showSection('privacy')">Privacy Policy</a>
     </nav>
     <div>
-      <select onchange="switchLanguage(this.value)">
-        <option value="de">Deutsch</option>
+      <select id="lang-selector" onchange="switchLanguage(this.value)">
         <option value="en" selected>English</option>
+        <option value="de">Deutsch</option>
         <option value="es">Español</option>
       </select>
     </div>
@@ -78,118 +88,168 @@
     <!-- HOME SECTION -->
     <div id="home" class="section">
 
-      <!-- German -->
-      <div class="lang lang-de hidden">
-        <h2>Clara - Perioden-Tracker</h2>
-        <p>Verstehen Sie Ihren Zyklus mit Respekt und Privatsphäre. Clara ist ein durchdachter Begleiter, der Ihnen hilft, die natürlichen Rhythmen Ihres Körpers zu verstehen.</p>
-        <h3>Hauptfunktionen</h3>
-        <ul>
-          <li>Einfache, intuitive Perioden-Erfassung</li>
-          <li>Musteranalyse mit medizinischem Kontext</li>
-          <li>Zyklusvorhersagen basierend auf Ihren Daten</li>
-          <li>Professionelle PDF-Berichte für Arztbesuche</li>
-          <li>Vollständige Datenprivatsphäre – alles bleibt auf Ihrem Gerät</li>
-          <li>Verfügbar in Deutsch, Englisch und Spanisch</li>
-        </ul>
-        <h3>Mustererkennung</h3>
-        <p>Clara analysiert Ihre Daten, um Muster zu erkennen, die Sie mit Ihrer Ärztin oder Ihrem Arzt besprechen können. Diese Beobachtungen sind keine Diagnosen.</p>
-        <h3>Premium-Version</h3>
-        <p>Schalten Sie unbegrenzte historische Daten mit einem einmaligen Kauf frei.</p>
-        <h3>Datenschutz</h3>
-        <p>Ihre Gesundheitsdaten gehören Ihnen. Clara speichert alle Informationen lokal auf Ihrem Gerät – nichts wird auf Server hochgeladen oder mit Dritten geteilt.</p>
-        <p><strong>Hinweis:</strong> Clara ist ein Erfassungstool, keine medizinische Beratung.</p>
-        <a href="https://apps.apple.com/app/id6753362454" class="button">Im App Store herunterladen</a>
-      </div>
-
       <!-- English -->
       <div class="lang lang-en">
         <h2>Clara - Period Tracker</h2>
         <p>Understand your cycle with respect and privacy. Clara is a thoughtful companion designed to help you understand your body's natural rhythms.</p>
+        
+        <h3>Why Choose Clara?</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Simple & Intuitive</h4>
+            <p>Track your period with ease using a clean, straightforward interface designed for daily use.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Pattern Analysis</h4>
+            <p>Identify patterns in your cycle with medically-informed context to discuss with your healthcare provider.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Smart Predictions</h4>
+            <p>Get cycle predictions based on your personal data to help you plan ahead with confidence.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Professional Reports</h4>
+            <p>Export detailed PDF reports for your healthcare visits with comprehensive cycle information.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Complete Privacy</h4>
+            <p>All data stays on your device. Nothing is uploaded to servers or shared with third parties.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Multilingual</h4>
+            <p>Available in English, German, and Spanish to support users worldwide.</p>
+          </div>
+        </div>
+
         <h3>Core Features</h3>
         <ul>
-          <li>Simple, intuitive period tracking</li>
-          <li>Pattern analysis with medical context</li>
-          <li>Cycle predictions based on your data</li>
-          <li>Professional PDF reports for healthcare visits</li>
-          <li>Full data privacy – everything stays on your device</li>
-          <li>Available in English, German, and Spanish</li>
+          <li><strong>Easy Period Tracking:</strong> Log your periods quickly with an intuitive interface</li>
+          <li><strong>Pattern Insights:</strong> Identify cycle patterns with medical context</li>
+          <li><strong>Cycle Predictions:</strong> Get personalized predictions based on your history</li>
+          <li><strong>PDF Export:</strong> Generate professional reports for healthcare appointments</li>
+          <li><strong>Full Privacy:</strong> All data stored locally - never uploaded or shared</li>
+          <li><strong>Premium Features:</strong> Unlock unlimited historical data with one-time purchase</li>
         </ul>
-        <h3>Pattern Insights</h3>
-        <p>Clara analyzes your tracked data to identify patterns you may want to discuss with your healthcare provider. These observations are not diagnoses.</p>
+
+        <div class="note">
+          <strong>Important:</strong> Clara is a tracking tool designed to help you monitor your cycle, not medical advice. Pattern observations are meant to facilitate discussions with your healthcare provider, not to diagnose conditions.
+        </div>
+
         <h3>Premium Version</h3>
-        <p>Unlock unlimited historical data with a one-time purchase.</p>
-        <h3>Privacy</h3>
-        <p>Your health data belongs to you. Clara stores all information locally on your device — nothing is uploaded to servers or shared with third parties.</p>
-        <p><strong>Note:</strong> Clara is a tracking tool, not medical advice.</p>
+        <p>The free version shows the last 4 months of your data. All your data continues to be stored safely on your device. Upgrade to Premium with a one-time purchase to access unlimited historical data and support ongoing development.</p>
+
         <a href="https://apps.apple.com/app/id6753362454" class="button">Download on the App Store</a>
+      </div>
+
+      <!-- German -->
+      <div class="lang lang-de hidden">
+        <h2>Clara - Perioden-Tracker</h2>
+        <p>Verstehen Sie Ihren Zyklus mit Respekt und Privatsphäre. Clara ist ein durchdachter Begleiter, der Ihnen hilft, die natürlichen Rhythmen Ihres Körpers zu verstehen.</p>
+        
+        <h3>Warum Clara Wählen?</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Einfach & Intuitiv</h4>
+            <p>Verfolgen Sie Ihre Periode mit einer klaren, unkomplizierten Benutzeroberfläche für den täglichen Gebrauch.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Musteranalyse</h4>
+            <p>Erkennen Sie Muster in Ihrem Zyklus mit medizinisch fundiertem Kontext für Gespräche mit Ihrer Ärztin.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Intelligente Vorhersagen</h4>
+            <p>Erhalten Sie Zyklusvorhersagen basierend auf Ihren persönlichen Daten zur besseren Planung.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Professionelle Berichte</h4>
+            <p>Exportieren Sie detaillierte PDF-Berichte für Arztbesuche mit umfassenden Zyklusinformationen.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Vollständige Privatsphäre</h4>
+            <p>Alle Daten bleiben auf Ihrem Gerät. Nichts wird auf Server hochgeladen oder mit Dritten geteilt.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Mehrsprachig</h4>
+            <p>Verfügbar in Deutsch, Englisch und Spanisch zur Unterstützung weltweiter Nutzer.</p>
+          </div>
+        </div>
+
+        <h3>Hauptfunktionen</h3>
+        <ul>
+          <li><strong>Einfache Perioden-Erfassung:</strong> Protokollieren Sie Ihre Perioden schnell mit intuitiver Benutzeroberfläche</li>
+          <li><strong>Muster-Einblicke:</strong> Erkennen Sie Zyklusmuster mit medizinischem Kontext</li>
+          <li><strong>Zyklusvorhersagen:</strong> Erhalten Sie personalisierte Vorhersagen basierend auf Ihrer Historie</li>
+          <li><strong>PDF-Export:</strong> Erstellen Sie professionelle Berichte für Arzttermine</li>
+          <li><strong>Vollständige Privatsphäre:</strong> Alle Daten lokal gespeichert - niemals hochgeladen oder geteilt</li>
+          <li><strong>Premium-Funktionen:</strong> Unbegrenzte historische Daten mit einmaligem Kauf freischalten</li>
+        </ul>
+
+        <div class="note">
+          <strong>Wichtig:</strong> Clara ist ein Erfassungstool zur Überwachung Ihres Zyklus, keine medizinische Beratung. Musterbeobachtungen sollen Gespräche mit Ihrer Ärztin erleichtern, nicht Zustände diagnostizieren.
+        </div>
+
+        <h3>Premium-Version</h3>
+        <p>Die kostenlose Version zeigt die letzten 4 Monate Ihrer Daten. Alle Ihre Daten werden weiterhin sicher auf Ihrem Gerät gespeichert. Upgraden Sie auf Premium mit einem einmaligen Kauf, um auf unbegrenzte historische Daten zuzugreifen und die laufende Entwicklung zu unterstützen.</p>
+
+        <a href="https://apps.apple.com/app/id6753362454" class="button">Im App Store herunterladen</a>
       </div>
 
       <!-- Spanish -->
       <div class="lang lang-es hidden">
         <h2>Clara - Calendario Menstrual</h2>
         <p>Comprende tu ciclo con respeto y privacidad. Clara es un compañero diseñado para ayudarte a comprender los ritmos naturales de tu cuerpo.</p>
-        <h3>Funciones principales</h3>
+        
+        <h3>¿Por Qué Elegir Clara?</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Simple e Intuitivo</h4>
+            <p>Rastrea tu período fácilmente usando una interfaz limpia y directa diseñada para uso diario.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Análisis de Patrones</h4>
+            <p>Identifica patrones en tu ciclo con contexto médico para discutir con tu proveedor de salud.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Predicciones Inteligentes</h4>
+            <p>Obtén predicciones de ciclo basadas en tus datos personales para planificar con confianza.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Reportes Profesionales</h4>
+            <p>Exporta reportes PDF detallados para tus consultas médicas con información completa del ciclo.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Privacidad Completa</h4>
+            <p>Todos los datos permanecen en tu dispositivo. Nada se sube a servidores ni se comparte con terceros.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Multilingüe</h4>
+            <p>Disponible en Español, Inglés y Alemán para usuarios de todo el mundo.</p>
+          </div>
+        </div>
+
+        <h3>Funciones Principales</h3>
         <ul>
-          <li>Seguimiento menstrual simple e intuitivo</li>
-          <li>Análisis de patrones con contexto médico</li>
-          <li>Predicciones de ciclo basadas en tus datos</li>
-          <li>Reportes PDF profesionales para consultas médicas</li>
-          <li>Privacidad total – todo permanece en tu dispositivo</li>
-          <li>Disponible en Español, Inglés y Alemán</li>
+          <li><strong>Seguimiento Fácil del Período:</strong> Registra tus períodos rápidamente con interfaz intuitiva</li>
+          <li><strong>Análisis de Patrones:</strong> Identifica patrones de ciclo con contexto médico</li>
+          <li><strong>Predicciones de Ciclo:</strong> Obtén predicciones personalizadas basadas en tu historial</li>
+          <li><strong>Exportación PDF:</strong> Genera reportes profesionales para citas médicas</li>
+          <li><strong>Privacidad Total:</strong> Todos los datos almacenados localmente - nunca subidos o compartidos</li>
+          <li><strong>Funciones Premium:</strong> Desbloquea datos históricos ilimitados con compra única</li>
         </ul>
-        <h3>Análisis de patrones</h3>
-        <p>Clara analiza tus datos para identificar patrones que puedes discutir con tu médico. Estas observaciones no son diagnósticos.</p>
+
+        <div class="note">
+          <strong>Importante:</strong> Clara es una herramienta de seguimiento diseñada para ayudarte a monitorear tu ciclo, no consejo médico. Las observaciones de patrones están destinadas a facilitar discusiones con tu proveedor de salud, no a diagnosticar condiciones.
+        </div>
+
         <h3>Versión Premium</h3>
-        <p>Desbloquea datos históricos ilimitados con una compra única.</p>
-        <h3>Privacidad</h3>
-        <p>Tus datos de salud te pertenecen. Clara almacena toda la información localmente en tu dispositivo – nada se sube a servidores ni se comparte con terceros.</p>
-        <p><strong>Nota:</strong> Clara es una herramienta de seguimiento, no consejo médico.</p>
+        <p>La versión gratuita muestra los últimos 4 meses de tus datos. Todos tus datos continúan almacenándose de forma segura en tu dispositivo. Actualiza a Premium con una compra única para acceder a datos históricos ilimitados y apoyar el desarrollo continuo.</p>
+
         <a href="https://apps.apple.com/app/id6753362454" class="button">Descargar en el App Store</a>
       </div>
     </div>
 
     <!-- SUPPORT SECTION -->
     <div id="support" class="section hidden">
-
-      <!-- German -->
-      <div class="lang lang-de hidden">
-        <h2>Support & Hilfe</h2>
-        <p>Benötigen Sie Hilfe mit Clara? Wir sind für Sie da.</p>
-        
-        <h3>Kontakt</h3>
-        <p>E-Mail: <a href="mailto:Bandurria.Apps@gmail.com">Bandurria.Apps@gmail.com</a></p>
-        <p>Wir antworten normalerweise innerhalb von 24-48 Stunden.</p>
-        
-        <h3>Häufig gestellte Fragen</h3>
-        
-        <div class="faq-item">
-          <strong>Wie ändere ich die Sprache?</strong>
-          <p>Tippen Sie auf das Flaggensymbol unter dem Logo auf dem Hauptbildschirm und wählen Sie Ihre bevorzugte Sprache.</p>
-        </div>
-        
-        <div class="faq-item">
-          <strong>Wie stelle ich meinen Premium-Kauf wieder her?</strong>
-          <p>Tippen Sie auf "Unbegrenzte Historie freischalten" und dann auf "Kauf wiederherstellen". Verwenden Sie dieselbe Apple-ID, mit der Sie ursprünglich gekauft haben.</p>
-        </div>
-        
-        <div class="faq-item">
-          <strong>Sind meine Daten privat?</strong>
-          <p>Ja, alle Ihre Daten werden nur lokal auf Ihrem Gerät gespeichert. Nichts wird auf Server hochgeladen oder mit Dritten geteilt.</p>
-        </div>
-        
-        <div class="faq-item">
-          <strong>Wie exportiere ich einen PDF-Bericht?</strong>
-          <p>Tippen Sie auf "PDF-Bericht exportieren" auf dem Hauptbildschirm, wählen Sie Ihren gewünschten Datumsbereich und tippen Sie auf "Exportieren".</p>
-        </div>
-        
-        <div class="faq-item">
-          <strong>Was zeigt die kostenlose Version?</strong>
-          <p>Die kostenlose Version zeigt die letzten 4 Monate Ihrer Daten. Alle Daten werden weiterhin gespeichert – Sie benötigen Premium, um auf ältere Daten zuzugreifen.</p>
-        </div>
-        
-        <h3>Technischer Support</h3>
-        <p>Für technische Probleme oder Fragen zu Clara senden Sie uns bitte eine E-Mail mit Details zu Ihrem Gerät und Ihrer iOS-Version.</p>
-      </div>
 
       <!-- English -->
       <div class="lang lang-en">
@@ -204,31 +264,125 @@
         
         <div class="faq-item">
           <strong>How do I change the language?</strong>
-          <p>Tap the flag icon below the logo on the main screen and select your preferred language.</p>
+          <p>Tap the flag icon below the logo on the main screen and select your preferred language from English, German, or Spanish.</p>
         </div>
         
         <div class="faq-item">
           <strong>How do I restore my premium purchase?</strong>
-          <p>Tap "Unlock Unlimited History" then "Restore Purchase". Make sure you're using the same Apple ID you originally purchased with.</p>
+          <p>Tap "Unlock Unlimited History" then "Restore Purchase". Make sure you're using the same Apple ID you originally purchased with. All purchases are managed through Apple's secure system.</p>
         </div>
         
         <div class="faq-item">
           <strong>Is my data private?</strong>
-          <p>Yes, all your data is stored locally on your device only. Nothing is uploaded to servers or shared with third parties.</p>
+          <p>Yes! All your tracking data is stored locally on your device only. Clara never uploads your data to servers or shares it with third parties. Your health information stays completely private.</p>
         </div>
         
         <div class="faq-item">
           <strong>How do I export a PDF report?</strong>
-          <p>Tap "Export PDF Report" on the main screen, select your desired date range, and tap "Export".</p>
+          <p>Tap "Export PDF Report" on the main screen, select your desired date range for the report, and tap "Export". You can then share or save the PDF for your healthcare appointments.</p>
         </div>
         
         <div class="faq-item">
           <strong>What does the free version show?</strong>
-          <p>The free version shows the last 4 months of your data. All data is still stored — you need Premium to access older data.</p>
+          <p>The free version displays the last 4 months of your tracking data. All your data continues to be stored safely on your device - you need Premium to view data older than 4 months.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>What are pattern insights?</strong>
+          <p>Clara analyzes your tracked cycles to identify patterns like cycle length regularity, symptom frequency, and other trends. These insights provide context to help you have informed discussions with your healthcare provider.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>How accurate are the predictions?</strong>
+          <p>Predictions improve over time as Clara learns your unique cycle patterns. They're based on your personal history, not generic averages. Remember that cycle variations are normal and predictions are estimates.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Can I delete my data?</strong>
+          <p>Yes, all data is deleted when you delete the app. You have complete control over your information at all times.</p>
         </div>
         
         <h3>Technical Support</h3>
-        <p>For technical issues or questions about Clara, please email us with details about your device and iOS version.</p>
+        <p>For technical issues or questions about Clara, please email us with:</p>
+        <ul>
+          <li>Your device model and iOS version</li>
+          <li>Description of the issue</li>
+          <li>Any error messages you see</li>
+          <li>Screenshots if applicable</li>
+        </ul>
+        
+        <h3>System Requirements</h3>
+        <ul>
+          <li>iOS 15.0 or later</li>
+          <li>iPhone or iPad</li>
+        </ul>
+      </div>
+
+      <!-- German -->
+      <div class="lang lang-de hidden">
+        <h2>Support & Hilfe</h2>
+        <p>Benötigen Sie Hilfe mit Clara? Wir sind für Sie da.</p>
+        
+        <h3>Kontakt</h3>
+        <p>E-Mail: <a href="mailto:Bandurria.Apps@gmail.com">Bandurria.Apps@gmail.com</a></p>
+        <p>Wir antworten normalerweise innerhalb von 24-48 Stunden.</p>
+        
+        <h3>Häufig Gestellte Fragen</h3>
+        
+        <div class="faq-item">
+          <strong>Wie ändere ich die Sprache?</strong>
+          <p>Tippen Sie auf das Flaggensymbol unter dem Logo auf dem Hauptbildschirm und wählen Sie Ihre bevorzugte Sprache aus Deutsch, Englisch oder Spanisch.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Wie stelle ich meinen Premium-Kauf wieder her?</strong>
+          <p>Tippen Sie auf "Unbegrenzte Historie freischalten" und dann auf "Kauf wiederherstellen". Verwenden Sie dieselbe Apple-ID, mit der Sie ursprünglich gekauft haben. Alle Käufe werden über Apples sicheres System verwaltet.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Sind meine Daten privat?</strong>
+          <p>Ja! Alle Ihre Tracking-Daten werden nur lokal auf Ihrem Gerät gespeichert. Clara lädt Ihre Daten niemals auf Server hoch oder teilt sie mit Dritten. Ihre Gesundheitsinformationen bleiben vollständig privat.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Wie exportiere ich einen PDF-Bericht?</strong>
+          <p>Tippen Sie auf "PDF-Bericht exportieren" auf dem Hauptbildschirm, wählen Sie Ihren gewünschten Datumsbereich für den Bericht und tippen Sie auf "Exportieren". Sie können das PDF dann für Ihre Arzttermine teilen oder speichern.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Was zeigt die kostenlose Version?</strong>
+          <p>Die kostenlose Version zeigt die letzten 4 Monate Ihrer Tracking-Daten. Alle Ihre Daten werden weiterhin sicher auf Ihrem Gerät gespeichert - Sie benötigen Premium, um auf Daten zuzugreifen, die älter als 4 Monate sind.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Was sind Muster-Einblicke?</strong>
+          <p>Clara analysiert Ihre verfolgten Zyklen, um Muster wie Zykluslängenregelmäßigkeit, Symptomhäufigkeit und andere Trends zu erkennen. Diese Einblicke bieten Kontext, um informierte Gespräche mit Ihrer Ärztin zu führen.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Wie genau sind die Vorhersagen?</strong>
+          <p>Vorhersagen verbessern sich im Laufe der Zeit, da Clara Ihre einzigartigen Zyklusmuster lernt. Sie basieren auf Ihrer persönlichen Historie, nicht auf generischen Durchschnittswerten. Denken Sie daran, dass Zyklusschwankungen normal sind und Vorhersagen Schätzungen sind.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Kann ich meine Daten löschen?</strong>
+          <p>Ja, alle Daten werden gelöscht, wenn Sie die App löschen. Sie haben jederzeit die vollständige Kontrolle über Ihre Informationen.</p>
+        </div>
+        
+        <h3>Technischer Support</h3>
+        <p>Für technische Probleme oder Fragen zu Clara senden Sie uns bitte eine E-Mail mit:</p>
+        <ul>
+          <li>Ihrem Gerätemodell und iOS-Version</li>
+          <li>Beschreibung des Problems</li>
+          <li>Alle Fehlermeldungen, die Sie sehen</li>
+          <li>Screenshots, falls zutreffend</li>
+        </ul>
+        
+        <h3>Systemanforderungen</h3>
+        <ul>
+          <li>iOS 15.0 oder neuer</li>
+          <li>iPhone oder iPad</li>
+        </ul>
       </div>
 
       <!-- Spanish -->
@@ -244,68 +398,173 @@
         
         <div class="faq-item">
           <strong>¿Cómo cambio el idioma?</strong>
-          <p>Toca el ícono de la bandera debajo del logo en la pantalla principal y selecciona tu idioma preferido.</p>
+          <p>Toca el ícono de la bandera debajo del logo en la pantalla principal y selecciona tu idioma preferido de Español, Inglés o Alemán.</p>
         </div>
         
         <div class="faq-item">
           <strong>¿Cómo restauro mi compra premium?</strong>
-          <p>Toca "Desbloquear Historial Ilimitado" y luego "Restaurar Compra". Asegúrate de usar el mismo Apple ID con el que compraste originalmente.</p>
+          <p>Toca "Desbloquear Historial Ilimitado" y luego "Restaurar Compra". Asegúrate de usar el mismo Apple ID con el que compraste originalmente. Todas las compras se gestionan a través del sistema seguro de Apple.</p>
         </div>
         
         <div class="faq-item">
           <strong>¿Son privados mis datos?</strong>
-          <p>Sí, todos tus datos se almacenan localmente solo en tu dispositivo. Nada se sube a servidores ni se comparte con terceros.</p>
+          <p>¡Sí! Todos tus datos de seguimiento se almacenan localmente solo en tu dispositivo. Clara nunca sube tus datos a servidores ni los comparte con terceros. Tu información de salud permanece completamente privada.</p>
         </div>
         
         <div class="faq-item">
           <strong>¿Cómo exporto un reporte PDF?</strong>
-          <p>Toca "Exportar Reporte PDF" en la pantalla principal, selecciona tu rango de fechas deseado y toca "Exportar".</p>
+          <p>Toca "Exportar Reporte PDF" en la pantalla principal, selecciona tu rango de fechas deseado para el reporte y toca "Exportar". Luego puedes compartir o guardar el PDF para tus citas médicas.</p>
         </div>
         
         <div class="faq-item">
           <strong>¿Qué muestra la versión gratuita?</strong>
-          <p>La versión gratuita muestra los últimos 4 meses de tus datos. Todos los datos se siguen guardando — necesitas Premium para acceder a datos más antiguos.</p>
+          <p>La versión gratuita muestra los últimos 4 meses de tus datos de seguimiento. Todos tus datos continúan almacenándose de forma segura en tu dispositivo - necesitas Premium para ver datos de más de 4 meses.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>¿Qué son los análisis de patrones?</strong>
+          <p>Clara analiza tus ciclos rastreados para identificar patrones como regularidad de duración del ciclo, frecuencia de síntomas y otras tendencias. Estos análisis proporcionan contexto para ayudarte a tener discusiones informadas con tu proveedor de salud.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>¿Qué tan precisas son las predicciones?</strong>
+          <p>Las predicciones mejoran con el tiempo a medida que Clara aprende tus patrones de ciclo únicos. Se basan en tu historial personal, no en promedios genéricos. Recuerda que las variaciones del ciclo son normales y las predicciones son estimaciones.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>¿Puedo eliminar mis datos?</strong>
+          <p>Sí, todos los datos se eliminan cuando eliminas la aplicación. Tienes control completo sobre tu información en todo momento.</p>
         </div>
         
         <h3>Soporte Técnico</h3>
-        <p>Para problemas técnicos o preguntas sobre Clara, envíanos un email con detalles sobre tu dispositivo y versión de iOS.</p>
+        <p>Para problemas técnicos o preguntas sobre Clara, envíanos un email con:</p>
+        <ul>
+          <li>Tu modelo de dispositivo y versión de iOS</li>
+          <li>Descripción del problema</li>
+          <li>Cualquier mensaje de error que veas</li>
+          <li>Capturas de pantalla si es aplicable</li>
+        </ul>
+        
+        <h3>Requisitos del Sistema</h3>
+        <ul>
+          <li>iOS 15.0 o posterior</li>
+          <li>iPhone o iPad</li>
+        </ul>
       </div>
     </div>
 
     <!-- PRIVACY SECTION -->
     <div id="privacy" class="section hidden">
 
-      <!-- German -->
-      <div class="lang lang-de hidden">
-        <h2>Datenschutz</h2>
-        <h3>Keine Datenerfassung</h3>
-        <p>Clara sammelt oder teilt keine persönlichen Daten. Alles bleibt auf Ihrem Gerät.</p>
-        <h3>In-App-Käufe</h3>
-        <p>Zahlungen werden sicher über den App Store abgewickelt. Der Entwickler hat keinen Zugriff auf Zahlungsdaten.</p>
-        <h3>Ihre Kontrolle</h3>
-        <p>Beim Löschen der App werden auch alle Daten entfernt. Keine Kopien bleiben beim Entwickler.</p>
-      </div>
-
       <!-- English -->
       <div class="lang lang-en">
         <h2>Privacy Policy</h2>
+        
         <h3>No Data Collection</h3>
-        <p>Clara does not collect, transmit, or share personal data. Everything stays on your device.</p>
+        <p>Clara does not collect, transmit, or share any personal data or health information. All tracking data stays exclusively on your device.</p>
+        
+        <h3>Local Storage Only</h3>
+        <p>Your cycle data, patterns, and all other information are stored locally using iOS secure storage. Clara has no servers, no cloud sync, and no external data transmission of any kind.</p>
+        
         <h3>In-App Purchases</h3>
-        <p>Purchases are securely processed by Apple. The developer has no access to payment details.</p>
-        <h3>Your Control</h3>
-        <p>If you delete the app, all your data is deleted with it. No copies remain with the developer.</p>
+        <p>Premium purchases are processed securely through Apple's App Store. The developer has no access to your payment information. All transactions are handled by Apple according to their privacy policy.</p>
+        
+        <h3>No Analytics or Tracking</h3>
+        <p>Clara does not collect analytics, crash reports, usage statistics, or any tracking data. We have no visibility into how you use the app.</p>
+        
+        <h3>Your Complete Control</h3>
+        <p>You have full control over your data:</p>
+        <ul>
+          <li>All data is stored only on your device</li>
+          <li>When you delete the app, all your data is permanently deleted</li>
+          <li>No copies of your data exist with the developer or any third party</li>
+          <li>You can export your data as PDF for your own records</li>
+        </ul>
+        
+        <h3>Health Data Privacy</h3>
+        <p>Clara treats your menstrual health data with the utmost respect and privacy. We understand the sensitivity of this information and have designed the app to ensure it never leaves your personal device.</p>
+        
+        <h3>Updates to This Policy</h3>
+        <p>We may update this privacy policy from time to time. Any changes will be posted on this page. The core principle will always remain: your data stays on your device.</p>
+        
+        <h3>Contact</h3>
+        <p>If you have questions about privacy, contact us at: <a href="mailto:Bandurria.Apps@gmail.com">Bandurria.Apps@gmail.com</a></p>
+        
+        <p><em>Last updated: January 2025</em></p>
+      </div>
+
+      <!-- German -->
+      <div class="lang lang-de hidden">
+        <h2>Datenschutzerklärung</h2>
+        
+        <h3>Keine Datenerfassung</h3>
+        <p>Clara sammelt, überträgt oder teilt keine persönlichen Daten oder Gesundheitsinformationen. Alle Tracking-Daten bleiben ausschließlich auf Ihrem Gerät.</p>
+        
+        <h3>Nur Lokale Speicherung</h3>
+        <p>Ihre Zyklusdaten, Muster und alle anderen Informationen werden lokal mit der sicheren iOS-Speicherung gespeichert. Clara hat keine Server, keine Cloud-Synchronisation und keine externe Datenübertragung jeglicher Art.</p>
+        
+        <h3>In-App-Käufe</h3>
+        <p>Premium-Käufe werden sicher über Apples App Store abgewickelt. Der Entwickler hat keinen Zugriff auf Ihre Zahlungsinformationen. Alle Transaktionen werden von Apple gemäß ihrer Datenschutzrichtlinie abgewickelt.</p>
+        
+        <h3>Keine Analysen oder Tracking</h3>
+        <p>Clara sammelt keine Analysen, Absturzberichte, Nutzungsstatistiken oder Tracking-Daten. Wir haben keine Einsicht, wie Sie die App verwenden.</p>
+        
+        <h3>Ihre Vollständige Kontrolle</h3>
+        <p>Sie haben die volle Kontrolle über Ihre Daten:</p>
+        <ul>
+          <li>Alle Daten werden nur auf Ihrem Gerät gespeichert</li>
+          <li>Wenn Sie die App löschen, werden alle Ihre Daten dauerhaft gelöscht</li>
+          <li>Es existieren keine Kopien Ihrer Daten beim Entwickler oder Dritten</li>
+          <li>Sie können Ihre Daten als PDF für Ihre eigenen Aufzeichnungen exportieren</li>
+        </ul>
+        
+        <h3>Gesundheitsdaten-Privatsphäre</h3>
+        <p>Clara behandelt Ihre Menstruationsgesundheitsdaten mit größtem Respekt und Privatsphäre. Wir verstehen die Sensibilität dieser Informationen und haben die App so konzipiert, dass sie niemals Ihr persönliches Gerät verlassen.</p>
+        
+        <h3>Aktualisierungen dieser Richtlinie</h3>
+        <p>Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Alle Änderungen werden auf dieser Seite veröffentlicht. Das Kernprinzip bleibt immer dasselbe: Ihre Daten bleiben auf Ihrem Gerät.</p>
+        
+        <h3>Kontakt</h3>
+        <p>Bei Fragen zum Datenschutz kontaktieren Sie uns unter: <a href="mailto:Bandurria.Apps@gmail.com">Bandurria.Apps@gmail.com</a></p>
+        
+        <p><em>Zuletzt aktualisiert: Januar 2025</em></p>
       </div>
 
       <!-- Spanish -->
       <div class="lang lang-es hidden">
         <h2>Política de Privacidad</h2>
-        <h3>No se recopilan datos</h3>
-        <p>Clara no recopila ni comparte información personal. Todo permanece en tu dispositivo.</p>
-        <h3>Compras dentro de la app</h3>
-        <p>Las compras se procesan de forma segura a través de Apple. El desarrollador no accede a tus datos de pago.</p>
-        <h3>Tu control</h3>
-        <p>Si eliminas la app, todos tus datos se eliminan. No se conservan copias en el desarrollador.</p>
+        
+        <h3>No se Recopilan Datos</h3>
+        <p>Clara no recopila, transmite ni comparte ningún dato personal o información de salud. Todos los datos de seguimiento permanecen exclusivamente en tu dispositivo.</p>
+        
+        <h3>Solo Almacenamiento Local</h3>
+        <p>Tus datos de ciclo, patrones y toda otra información se almacenan localmente usando el almacenamiento seguro de iOS. Clara no tiene servidores, no tiene sincronización en la nube y no hay transmisión externa de datos de ningún tipo.</p>
+        
+        <h3>Compras Dentro de la App</h3>
+        <p>Las compras Premium se procesan de forma segura a través del App Store de Apple. El desarrollador no tiene acceso a tu información de pago. Todas las transacciones son manejadas por Apple según su política de privacidad.</p>
+        
+        <h3>Sin Análisis o Rastreo</h3>
+        <p>Clara no recopila análisis, informes de fallos, estadísticas de uso o datos de rastreo. No tenemos visibilidad de cómo usas la aplicación.</p>
+        
+        <h3>Tu Control Completo</h3>
+        <p>Tienes control total sobre tus datos:</p>
+        <ul>
+          <li>Todos los datos se almacenan solo en tu dispositivo</li>
+          <li>Cuando eliminas la aplicación, todos tus datos se eliminan permanentemente</li>
+          <li>No existen copias de tus datos con el desarrollador o terceros</li>
+          <li>Puedes exportar tus datos como PDF para tus propios registros</li>
+        </ul>
+        
+        <h3>Privacidad de Datos de Salud</h3>
+        <p>Clara trata tus datos de salud menstrual con el máximo respeto y privacidad. Entendemos la sensibilidad de esta información y hemos diseñado la aplicación para asegurar que nunca salga de tu dispositivo personal.</p>
+        
+        <h3>Actualizaciones de esta Política</h3>
+        <p>Podemos actualizar esta política de privacidad de vez en cuando. Cualquier cambio se publicará en esta página. El principio central siempre permanecerá: tus datos permanecen en tu dispositivo.</p>
+        
+        <h3>Contacto</h3>
+        <p>Si tienes preguntas sobre privacidad, contáctanos en: <a href="mailto:Bandurria.Apps@gmail.com">Bandurria.Apps@gmail.com</a></p>
+        
+        <p><em>Última actualización: Enero 2025</em></p>
       </div>
     </div>
 
@@ -315,5 +574,4 @@
     © 2025 Clara Tracker. All rights reserved. | Contact: <a href="mailto:Bandurria.Apps@gmail.com">Bandurria.Apps@gmail.com</a>
   </footer>
 </body>
-
 </html>
