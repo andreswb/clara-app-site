@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +13,14 @@
     nav a:hover { text-decoration: underline; }
     .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
     h2 { color: #222; }
+    h3 { color: #444; margin-top: 25px; }
     ul { margin-left: 20px; }
     a.button { display: inline-block; padding: 10px 20px; margin: 20px 0; background: #007aff; color: white; text-decoration: none; border-radius: 5px; }
     .hidden { display: none; }
     footer { text-align: center; padding: 20px; font-size: 0.9em; color: #555; border-top: 1px solid #ccc; margin-top: 40px; }
     select { padding: 5px; border-radius: 5px; }
+    .faq-item { margin-bottom: 20px; }
+    .faq-item strong { color: #007aff; }
   </style>
   
 <script>
@@ -39,11 +41,14 @@
   }
 
   window.onload = function() {
-    const hash = window.location.hash.substring(1); // e.g. #privacy
-    const lang = getQueryParam('lang'); // e.g. ?lang=de
+    const hash = window.location.hash.substring(1);
+    const lang = getQueryParam('lang');
 
-    showSection(hash === 'privacy' ? 'privacy' : 'home'); // default to home
-    switchLanguage(lang === 'de' || lang === 'es' ? lang : 'en'); // default to English
+    if (hash === 'privacy') showSection('privacy');
+    else if (hash === 'support') showSection('support');
+    else showSection('home');
+    
+    switchLanguage(lang === 'de' || lang === 'es' ? lang : 'en');
   }
 </script>
 
@@ -51,11 +56,12 @@
 <body>
   <header>
     <h1 style="display:flex; align-items:center;">
-	<img src="favicon.ico" alt "Clara Logo" style="height:32px; width:32px; margin-right:10px;">
+	<img src="favicon.ico" alt="Clara Logo" style="height:32px; width:32px; margin-right:10px;">
 	Clara Tracker
 	</h1>
     <nav>
       <a href="#home" onclick="showSection('home')">Home</a>
+      <a href="#support" onclick="showSection('support')">Support</a>
       <a href="#privacy" onclick="showSection('privacy')">Privacy Policy</a>
     </nav>
     <div>
@@ -98,7 +104,7 @@
       <!-- English -->
       <div class="lang lang-en">
         <h2>Clara - Period Tracker</h2>
-        <p>Understand your cycle with respect and privacy. Clara is a thoughtful companion designed to help you understand your body’s natural rhythms.</p>
+        <p>Understand your cycle with respect and privacy. Clara is a thoughtful companion designed to help you understand your body's natural rhythms.</p>
         <h3>Core Features</h3>
         <ul>
           <li>Simple, intuitive period tracking</li>
@@ -138,7 +144,131 @@
         <h3>Privacidad</h3>
         <p>Tus datos de salud te pertenecen. Clara almacena toda la información localmente en tu dispositivo – nada se sube a servidores ni se comparte con terceros.</p>
         <p><strong>Nota:</strong> Clara es una herramienta de seguimiento, no consejo médico.</p>
-        <a href="https://apps.apple.com/app/idYOUR_APP_ID" class="button">Descargar en el App Store</a>
+        <a href="https://apps.apple.com/app/id6753362454" class="button">Descargar en el App Store</a>
+      </div>
+    </div>
+
+    <!-- SUPPORT SECTION -->
+    <div id="support" class="section hidden">
+
+      <!-- German -->
+      <div class="lang lang-de hidden">
+        <h2>Support & Hilfe</h2>
+        <p>Benötigen Sie Hilfe mit Clara? Wir sind für Sie da.</p>
+        
+        <h3>Kontakt</h3>
+        <p>E-Mail: <a href="mailto:Bandurria.Apps@gmail.com">Bandurria.Apps@gmail.com</a></p>
+        <p>Wir antworten normalerweise innerhalb von 24-48 Stunden.</p>
+        
+        <h3>Häufig gestellte Fragen</h3>
+        
+        <div class="faq-item">
+          <strong>Wie ändere ich die Sprache?</strong>
+          <p>Tippen Sie auf das Flaggensymbol unter dem Logo auf dem Hauptbildschirm und wählen Sie Ihre bevorzugte Sprache.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Wie stelle ich meinen Premium-Kauf wieder her?</strong>
+          <p>Tippen Sie auf "Unbegrenzte Historie freischalten" und dann auf "Kauf wiederherstellen". Verwenden Sie dieselbe Apple-ID, mit der Sie ursprünglich gekauft haben.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Sind meine Daten privat?</strong>
+          <p>Ja, alle Ihre Daten werden nur lokal auf Ihrem Gerät gespeichert. Nichts wird auf Server hochgeladen oder mit Dritten geteilt.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Wie exportiere ich einen PDF-Bericht?</strong>
+          <p>Tippen Sie auf "PDF-Bericht exportieren" auf dem Hauptbildschirm, wählen Sie Ihren gewünschten Datumsbereich und tippen Sie auf "Exportieren".</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Was zeigt die kostenlose Version?</strong>
+          <p>Die kostenlose Version zeigt die letzten 4 Monate Ihrer Daten. Alle Daten werden weiterhin gespeichert – Sie benötigen Premium, um auf ältere Daten zuzugreifen.</p>
+        </div>
+        
+        <h3>Technischer Support</h3>
+        <p>Für technische Probleme oder Fragen zu Clara senden Sie uns bitte eine E-Mail mit Details zu Ihrem Gerät und Ihrer iOS-Version.</p>
+      </div>
+
+      <!-- English -->
+      <div class="lang lang-en">
+        <h2>Support & Help</h2>
+        <p>Need help with Clara? We're here to assist you.</p>
+        
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:Bandurria.Apps@gmail.com">Bandurria.Apps@gmail.com</a></p>
+        <p>We typically respond within 24-48 hours.</p>
+        
+        <h3>Frequently Asked Questions</h3>
+        
+        <div class="faq-item">
+          <strong>How do I change the language?</strong>
+          <p>Tap the flag icon below the logo on the main screen and select your preferred language.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>How do I restore my premium purchase?</strong>
+          <p>Tap "Unlock Unlimited History" then "Restore Purchase". Make sure you're using the same Apple ID you originally purchased with.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>Is my data private?</strong>
+          <p>Yes, all your data is stored locally on your device only. Nothing is uploaded to servers or shared with third parties.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>How do I export a PDF report?</strong>
+          <p>Tap "Export PDF Report" on the main screen, select your desired date range, and tap "Export".</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>What does the free version show?</strong>
+          <p>The free version shows the last 4 months of your data. All data is still stored — you need Premium to access older data.</p>
+        </div>
+        
+        <h3>Technical Support</h3>
+        <p>For technical issues or questions about Clara, please email us with details about your device and iOS version.</p>
+      </div>
+
+      <!-- Spanish -->
+      <div class="lang lang-es hidden">
+        <h2>Soporte y Ayuda</h2>
+        <p>¿Necesitas ayuda con Clara? Estamos aquí para asistirte.</p>
+        
+        <h3>Contacto</h3>
+        <p>Email: <a href="mailto:Bandurria.Apps@gmail.com">Bandurria.Apps@gmail.com</a></p>
+        <p>Normalmente respondemos en 24-48 horas.</p>
+        
+        <h3>Preguntas Frecuentes</h3>
+        
+        <div class="faq-item">
+          <strong>¿Cómo cambio el idioma?</strong>
+          <p>Toca el ícono de la bandera debajo del logo en la pantalla principal y selecciona tu idioma preferido.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>¿Cómo restauro mi compra premium?</strong>
+          <p>Toca "Desbloquear Historial Ilimitado" y luego "Restaurar Compra". Asegúrate de usar el mismo Apple ID con el que compraste originalmente.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>¿Son privados mis datos?</strong>
+          <p>Sí, todos tus datos se almacenan localmente solo en tu dispositivo. Nada se sube a servidores ni se comparte con terceros.</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>¿Cómo exporto un reporte PDF?</strong>
+          <p>Toca "Exportar Reporte PDF" en la pantalla principal, selecciona tu rango de fechas deseado y toca "Exportar".</p>
+        </div>
+        
+        <div class="faq-item">
+          <strong>¿Qué muestra la versión gratuita?</strong>
+          <p>La versión gratuita muestra los últimos 4 meses de tus datos. Todos los datos se siguen guardando — necesitas Premium para acceder a datos más antiguos.</p>
+        </div>
+        
+        <h3>Soporte Técnico</h3>
+        <p>Para problemas técnicos o preguntas sobre Clara, envíanos un email con detalles sobre tu dispositivo y versión de iOS.</p>
       </div>
     </div>
 
@@ -187,4 +317,3 @@
 </body>
 
 </html>
-
